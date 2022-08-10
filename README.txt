@@ -1,28 +1,31 @@
-REMIX DEFAULT WORKSPACE
+Decentralized KYC Verification Project
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
 
-This workspace contains 3 directories:
+Project is implemented using REMIX IDE and solidity programming language.
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
+Bank and Customer structure are created to define the structure of each entity.
+These entities are stored in mapping so that it is easily accessible from code.
 
-SCRIPTS
+Constructor is used to capture the admin(The person deploying the contract).
+Modifiers are used to restrict the access to some of admin work.
 
-The 'scripts' folder has four typescript files which help to deploy the 'Storage' contract using 'web3.js' and 'ethers.js' libraries.
+Implemented functionality of BlockChain are as fallows:
 
-For the deployment of any other contract, just update the contract's name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts` or  `deploy_with_web3.ts`
+1.AddNewBank: This function will add new bank to the blockchain. 
+It takes address and bankName as input creates new Bank entity and 	stores in mapping.
 
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
+2. GetCustomerDetails: This function will take bank address and shows details about 				the bank.
+3. AddNewCustomer: This function will creates customer entity and add new customer 					to existing bank and stores it in mapping. 
+It Takes customerName , customerDetatils and Bank Address as 	input and creates the entity.
 
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
+4.CheckKYCStatus: This function checks whether the customer KYC is done or note.
+It takes customeName and gives bool output showing KYC is 	done or not. 
 
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, web3, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
+5.AddNewCustomerRequestforKYC: This function will update the KYC status of 						Customer by checking the KYCPrivilage of bank which is updating. 					Takes CustomerName and address of bank as input.
+
+6.BlockBankToAddCustomer: This function takes bank address and block it from 						adding new customers.
+
+7.BlockBankToDoKYC: This function takes bank address as input and blocks bank 					from doing any KYC of customers.
+
+8.AllowBankToAddCustomer: This function takes bank address as input and allows already blocked bank to add new customers.
+9.AllowBankToDoKYC:This function takes bank address as input and allows already blocked bank to do KYC of new customers.

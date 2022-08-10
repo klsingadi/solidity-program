@@ -35,7 +35,7 @@ mapping (string => Customer) BankCustomers;
 
 
 function AddNewBank(string memory _BankName, address _BankAddress ) public OnlyAdmin {
-    //require(Banks[_BankAddress].BankAddress!= address(0), "Bank already exists!");
+    require(Banks[_BankAddress].BankAddress!= _BankAddress, "Bank already exists!");
     Banks[_BankAddress] = Bank(_BankName, _BankAddress, 0, true, true);
 }
 
@@ -47,6 +47,7 @@ function GetBankDetails(address _BankAddress) public view returns(string memory,
 function AddNewCustomer(string memory _CustomerName, string memory _CustomerData, address _CustomerBank ) public {
     require(Banks[_CustomerBank].BankAddress!= address(0), "Bank not found!");
     require(Banks[_CustomerBank].CanAddCustomer, "Does not have permission to add new customers!");
+    //require(BankCustomers[_CustomerName].CustomerName!= _CustomerName, "Customer already exists!");
     BankCustomers[_CustomerName] = Customer(_CustomerName, _CustomerData, _CustomerBank, false);
 }
 
